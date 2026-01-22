@@ -1,0 +1,243 @@
+ SIMPLE BEGINNER LEARNING ORDER
+Follow this exactly 👇
+Linux basics
+
+
+Git & GitHub
+
+
+Docker
+
+
+CI/CD (GitHub Actions)
+
+
+AWS basics
+
+
+Kubernetes
+
+
+Terraform
+
+
+Monitoring (Prometheus/Grafana)
+
+
+GIT & GITHUB
+
+1. Git is open source version control system
+
+                                                                                                    Committed Area
+Working Area
+Staging 
+Development 
+
+2. Before we should do anything in GIT operations, we should config a user details.
+3. If we do not config git, it will save in a text file.
+
+         # git config user.name  “<user>”
+         # git config user.mail “<user mail>”
+
+
+4. Below are the use ful commands 
+	
+	#git status     -> it will show the status of a tree whether it is committed or not 
+	#git restore   -> which reverted to old state of file 
+	#git add <file>  -> will move to staging are from working state 
+	#git add . 	-> will move all the file to staging area
+	#git restore –staged <file>	  -> it will revert back to working area from staging
+	#git rm <file>			-> remove the file permanently
+	#git log	-> will the all the details of committed file 
+	#git log -n -1 	  -> will show the latest commit to the file 
+	#git branch 	-> will show the branches list 
+	#git checkout -b <branch>	  -> will create a new branch & change the branch
+	#git branch <branch name>  -> will create a new branch
+	#git checkout <branch>    -> will moved to existing branch
+	#git branch -d <branch>    -> remove the branch 
+5. To see the previous commit history along with branch they were commit 
+	#git log - -graph - -decorate
+6. To see the previous commit with only name of the file and commit text
+	#git log - -name-only
+7. To commit the file with a commit message 
+Git commit = Save your project changes with a message
+	#git commit -m “<commit message>” <file>
+8. To move the stage file to commit direct without ( add command ) with a commit mess
+	#git commit -am “<commit message>”
+9. Git has a merged feature, which can merge two branches there are 2 types 
+         I. fast forward : it can happen when the current branch has no extra commits compared to the branch that we are merging. This type of merge cannot create a new commit, but rather than merge
+        II. No fast forward 
+10. Basic merge command
+	#git checkout master
+	#git merge <merging branch name>
+
+11. We cab add the remote repository to a local project with a git remote add command
+A Git repository (or repo) is a place where Git stores your project files and their entire history. A Git repository is a project folder that tracks all changes using Git
+	#git remote add origin <http://………/…..>
+             i. origin : name for the remote repository, we can may have the multiple also.
+12. We can list all remote repositories
+	#git remote -v
+13. We can push the remote
+Git push = upload your committed changes to a remote repository
+	#git push origin master
+	i. Master : branch name ( default )
+14. For cloning repository 
+Git clone means making a complete copy of an existing Git repository from a remote source to your local computer.
+	#git clone <http://………./….>
+15. We can fetch master in order to update the origin master branch in our local repo
+Git fetch means downloading the latest changes from a remote repository without changing your current work.
+	#git fetch origin master
+	#git merge origin/master
+16. Instead of individual fetching and merging, we can also pull the origin master branch with pull command
+Git pull means getting the latest changes from a remote repository and applying them to your current local branch.
+In simple terms:
+📥 Download updates
+
+
+🔄 Automatically add them to your files
+
+	#git pull origin master
+17. We can add the files which may get conflicts while merging by using the add command
+	#git add <file>
+	#git merge
+18. FORK : A copy of original file
+It can help creating your own copy of original final project, we can make changes and merge.
+
+JENKINS
+Jenkins is an open-source automation tool used to build, test, and deploy software automatically.
+It helps developers and DevOps teams automate repetitive tasks in the software development process.
+Jenkins is mainly used for CI/CD (Continuous Integration and Continuous Delivery/Deployment).
+Continuous Integration (CI)
+Developers frequently push code to Git
+Jenkins automatically:
+Pulls code
+Builds it
+Runs tests
+Continuous Delivery/Deployment (CD)
+Jenkins automatically:
+Deploys code to servers (Dev/Test/Prod)
+Ensures faster releases
+
+Role of Jenkins in DevOps
+Jenkins acts as the automation backbone of DevOps.
+Key Roles:
+Automates CI/CD pipeline
+Integrates with tools (Git, Maven, Docker, Kubernetes)
+Detects errors early
+Improves software quality
+Speeds up delivery
+Jenkins Plugins
+Plugins extend Jenkins functionality.
+Examples:
+Git Plugin
+Maven Plugin
+Docker Plugin
+Kubernetes Plugin
+Slack Plugin
+Installation steps to JENKINS
+Create a VM
+Login vm via root 
+Install java
+Create a git repository
+Adding repository key to system
+Append package repository to server source
+Update packages 
+Install jenkins 
+Process of installing
+#apt update
+#sudo apt install openjedk-11-jdk
+#wget -q -o https://pkg.jenkins.io/……….
+  Sudo apt-key add -
+-> next append the package repository to the server source
+-> it means we are tking the jenkins repository and adding to the package manager
+#sudo sh -c ‘echo deb https://pkg.jenkins.io/………
+   /etc/apt/source.list.d/jenkins.list’
+#sudo apt update -y
+#sudo apt install jenkins 
+#sudo systemctl start services
+-> now open the firewall, it will allow to interact with the jenkins
+#sudo ufw allo 8080
+#sudo ufw status
+#exit
+Copy ip address
+Open web browser and in search bar <ip>:8080
+Then we can access jenkins, if we cant access the jenkins, we should add the inbound rules and edit them 
+It will ask the passwd 
+We can check the passwd in below file 
+#sudo cat /var/lib/jenkins/secrets/initialAdminPasswd
+Install the plugins which will suggest 
+Installation of JENKINS in Redhat - stable 
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install fontconfig java-21-openjdk
+sudo yum install jenkins
+sudo systemctl daemon-reload
+Start Jenkins
+You can enable the Jenkins service to start at boot with the command:
+sudo systemctl enable jenkins
+bash
+Copied!
+You can start the Jenkins service with the command:
+sudo systemctl start jenkins
+You can check the status of the Jenkins service using the command:
+sudo systemctl status jenkins
+Note:
+The command: sudo cat /var/lib/jenkins/secrets/initialAdminPassword will print the password at console.
+If you are running Jenkins in Docker using the official jenkins/jenkins image you can use sudo docker exec ${CONTAINER_ID or CONTAINER_NAME} cat /var/jenkins_home/secrets/initialAdminPassword to print the password in the console without having to open an interactive shell inside the container.
+
+Now configuration of Jenkins CLI
+
+– open jenkins – jenkins tools – jenkins CLI – copy IP addr/link
+
+Login to the server 
+#wget http://<ip>:8080/jnlpjars/jenkins-cli.jar
+
+Now we should
+Open jenkins – profile – configure – API Token – Add new token
+It will create a new token copy that
+
+Now go back to server 
+#java -jar jenkins =-cli.jar -s http://<ip>:8080/ -auth mike:<copied_token> -websocket list jobs
+  I. mike - user name
+
+Creation of CI/CD pipeline 
+
+
+Goto jenkins – New Item – enter Item name – select pipe line – click on OK – new page will open scroll down – click on Try sample pipeline – Save
+
+Now go back to the terminal & run the list jobs command again 
+#java -jar jenkins =-cli.jar -s http://<ip>:8080/ -auth mike:<copied_token> -websocket build <testname>
+We have configured the SSH service in Jenkins to listen on a fixed port. To find out the port in use, run the command below:
+
+#curl -Lv http://localhost:8085/login 2>&1 | grep -i 'x-ssh-endpoint'
+Now that we have the port used by the Jenkins SSH server, let us begin interacting with Jenkins over ssh with the user mike.
+As mike, try running the following commands:
+
+mike@jenkins-server:~$ ssh -i /home/mike/.ssh/jenkins_key -l mike -p 8022 jenkins-server help
+Keep a note of the options used with the SSH command:
+-i flag is used to point to mike's private SSH key. Remember, we have already added the public key in the Jenkins configuration.
+-l is the login user which in our example is mike
+-p is the port which we found out in the previous step to be 8022
+Now we should restart the jenkins to interact smoothly
+#ssh -i /home/mike/.ssh/jenkins_key -l mike -p 8022 jenkins-server  safe-restart
+
+
+
+
+
+
+🛠 𝗗𝗼𝗰𝗸𝗲𝗿: Docker is the tool that allows developers to package their applications and dependencies into a container. It’s a lightweight, standalone package that can run anywhere, making development and deployment consistent across environments. Think of Docker as a virtual shipping container – it keeps everything organised and portable.
+
+📦 𝗗𝗼𝗰𝗸𝗲𝗿 𝗖𝗼𝗺𝗽𝗼𝘀𝗲: Need to manage multiple containers at once? Docker Compose is your go-to tool. It allows you to define and run multi-container Docker applications easily, using a single YAML file. For example, you could have a web application, database, and cache service all running in separate containers, and Docker Compose brings them together seamlessly.
+
+👑 𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀 (𝗞𝟴𝘀): If Docker is the foundation, Kubernetes is the crown jewel. Kubernetes is a powerful open-source system for automating deployment, scaling, and managing containerized applications. It’s like a traffic controller that ensures all your containers run smoothly, whether you’re working with a single service or scaling to thousands of containers in production.
+
+🔍 𝐄𝐱𝐚𝐦𝐩𝐥𝐞: Let’s say you’ve built a web app that needs an NGINX server, a database, and a Redis cache.
+With 𝘿𝙤𝙘𝙠𝙚𝙧, you can containerize each component.
+Using 𝘿𝙤𝙘𝙠𝙚𝙧 𝘾𝙤𝙢𝙥𝙤𝙨𝙚, you can define a docker-compose.yml file to manage the interaction between these containers locally.
+Finally, with 𝑲𝙪𝒃𝙚𝒓𝙣𝒆𝙩𝒆𝙨 you can scale this app, deploy it across a cluster, and ensure everything runs efficiently.
+
+
+
